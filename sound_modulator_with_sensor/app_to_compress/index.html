@@ -1,0 +1,51 @@
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>AppSound</title>
+
+	<style>
+		body{
+			margin:0px;
+			background-color: #ffccb3;
+		}
+		button{
+			margin-left: 30px;
+			margin-top: 50px;
+			color: #ffccb3;
+			font-size: 30px;
+			font-style: normal;
+			font-family:Arial;
+			font-weight: bold;
+			height:			182px;
+	    width:			182px;
+			border: none;
+			background-color:	black;
+			border-radius: 100px;
+
+
+
+
+		}
+		button:hover{
+			background-color: #323232;
+
+
+		}
+
+	</style>
+
+
+</head>
+<body data-IP='192.168.4.1'>
+
+
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/tunajs/1.0.0/tuna-min.js'></script>
+	<script src='appTuna.js'></script>
+	<button id='chorusBtn' class='musicBtn'>Chorus</button>
+  <button id='delayBtn' class='musicBtn'>Delay</button>
+	<button id='playBtn' class='musicBtn'>Play</button>
+	<audio id="audioPlayer" ></audio>
+	<span id='sensorVal'></span>
+
+</body>
+</html>
