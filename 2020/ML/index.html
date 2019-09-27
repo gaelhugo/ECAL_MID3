@@ -1,0 +1,44 @@
+<html>
+
+<head>
+<title>Teachable Machine</title>
+<script src="https://unpkg.com/ml5@0.2.1/dist/ml5.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/App.js"></script>
+<style type="text/css">
+button{
+  margin:20px;
+  font-size: 18px;
+  padding:20px;
+  border: none;
+  color:white;
+}
+div{
+  color:white;
+  padding:5px;
+}
+  #green,.green,#train_green{
+    background-color: green;
+  }
+  #purple,.purple,#train_purple{
+    background-color: purple;
+  }
+  #red,.red,#train_red{
+    background-color: red;
+  }
+  .output{
+    margin-top:40px;
+    color:black;
+  }
+</style>
+</head>
+
+<body>
+ <video id="video" width="640" height="480" autoplay></video><br/><br/>
+ <div id="interaction">
+   <div><button id="green">Add image</button><button id="train_green">Train</button><span id="legend_green" class="output">0 image</span></div>
+   <div><button id="purple">Add image</button><button id="train_purple">Train</button><span id="legend_purple" class="output">0 image</span></div>
+   <div><button id="red">Add image</button><button id="train_red">Train</button><span id="legend_red" class="output">0 image</span></div>
+</div>
+</body>
+
+</html>
