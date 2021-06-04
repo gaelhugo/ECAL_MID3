@@ -11,3 +11,7 @@ http-server
 App.js --> this.IS_AR = true
 Use WebXR viewer on IOS : https://apps.apple.com/us/app/webxr-viewer/id1295998056
 !! --> use an https server to display the page
+
+# MODULE trick
+
+change access to three
