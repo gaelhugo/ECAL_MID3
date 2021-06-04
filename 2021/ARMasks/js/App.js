@@ -16,10 +16,10 @@ import {
 class App {
   constructor() {
     //   AR STUFF
-    this.IS_AR = true;
+    this.IS_AR = false;
     this.session = {};
-    this.container = document.createElement("div");
-    this.container.className = "container";
+    this.container = document.querySelector("#container");
+    // this.container.className = "container";
     document.body.appendChild(this.container);
     // on est obligé d'avoir une interaction utilisateur pour commencer en AR
     // (ACTIVATION DE LA CAM)
@@ -125,6 +125,7 @@ class App {
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
+    if (this.IS_AR) this.renderer.setClearColor("rgba(220,220,255)");
     this.container.appendChild(this.renderer.domElement);
     //
 
