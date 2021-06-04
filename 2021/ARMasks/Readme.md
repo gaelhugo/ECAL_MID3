@@ -14,4 +14,5 @@ Use WebXR viewer on IOS : https://apps.apple.com/us/app/webxr-viewer/id129599805
 
 # MODULE trick
 
-change access to three
+change access to three<br/>
+../../../build/three.module.js
