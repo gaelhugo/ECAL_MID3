@@ -4,6 +4,7 @@ let ratio = 1;
 let handpose = null;
 let predictions = [];
 function setup() {
+  pixelDensity(1);
   createCanvas(windowWidth, windowHeight);
   noStroke();
   capture = createCapture(VIDEO);
