@@ -13,7 +13,7 @@ function setup() {
   setTimeout(() => {
     console.log(capture.width, capture.height); // 640->480
     // Avec les vraies dimensions de la video on peut faire les calculs de redimensionnement
-    // On obtiendra un ratio à appliquer à nos point de posehand, car ils sont calculé sur la video non resizée
+    // On obtiendra un ratio à appliquer à nos points de posehand, car ils sont calculés sur la video non resizée
     newWidth = windowWidth;
     ratio = newWidth / capture.width;
     newHeight = capture.height * ratio;
