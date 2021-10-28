@@ -68,7 +68,7 @@ body {
   justify-content: center;
   align-items: center;
 }
-#sound {
+#video {
   position: absolute;
   z-index: -1;
 }
@@ -94,7 +94,7 @@ h1 {
 canvas {
   position: absolute;
 }
-#sound canvas {
+#video canvas {
   position: absolute;
   left: 0px;
 }
