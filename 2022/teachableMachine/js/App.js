@@ -34,7 +34,7 @@ class App {
   readyToClassify() {
     console.log("ready to Classify");
     this.interaction = document.getElementById("interaction");
-    this.interaction.addEventListener("click", this.onClick.bind(this));
+    this.interaction.addEventListener("touchstart", this.onClick.bind(this));
     this.counter_green = 0;
     this.counter_violet = 0;
     this.counter_red = 0;
@@ -54,6 +54,7 @@ class App {
   }
 
   onClick(e) {
+    console.log(e);
     switch (e.target.id) {
       case "green":
         this.counter_green++;
