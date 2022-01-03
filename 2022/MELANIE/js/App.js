@@ -133,7 +133,7 @@ class App {
       /**
        * HERE YOU SHOW OR HIDE THE DEBUG
        */
-      //   this.person.show(this.ctx);
+      this.person.show(this.ctx);
     }
     this.MATTER.Engine.update(this.MATTER.engine);
     this.frameCount++;
