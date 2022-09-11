@@ -19,9 +19,7 @@ export default class Firebase extends EventEmitter {
   constructor() {
     super();
     // Your web app's Firebase configuration
-    const firebaseConfig = {
-      // your config here
-    };
+    const firebaseConfig = {};
 
     // Initialize Firebase
     this.app = initializeApp(firebaseConfig);
