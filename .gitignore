@@ -1,6 +1,18 @@
 node_modules
 ./*/node_modules
 ./*/*/node_modules
+./*/*/*/node_modules
+./*/*/*/*/node_modules
+./*/*/*/*/*/node_modules
+dist
+./*/dist
+./*/*/dist
+./*/*/*/dist
+./*/*/*/*/dist
+./*/*/*/*/*/dist
+./*/*/*/*/*/*/dist
+
+./*/*/*/.parcel-cache
 
 *.DS_Store
 .parcel-cache
