@@ -1,4 +1,5 @@
 import AiTool from "./AiTool.js";
+import Config from "./Config.js";
 export default class App {
   constructor() {
     this.canvas = document.getElementById("canvas");
@@ -30,7 +31,7 @@ export default class App {
       image.onload = () => {
         this.ctx.drawImage(image, 0, 0, 512, 512);
       };
-      image.src = `http://localhost:7860/file=${response.data[0][0].name}`;
+      image.src = `${Config.API}file=${response.data[0][0].name}`;
     }
   }
 }

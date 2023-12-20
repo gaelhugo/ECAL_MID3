@@ -1,4 +1,5 @@
 import Utils from "./Utils.js";
+import Config from "./Config.js";
 export default class AiTool {
   constructor() {
     this.OBJECT_TO_SEND = {
@@ -109,7 +110,7 @@ export default class AiTool {
       this.OBJECT_TO_SEND.data[10] = parseInt(height);
     }
 
-    return fetch("http://localhost:7860/run/predict/", {
+    return fetch(`${Config.API}run/predict/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
