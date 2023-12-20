@@ -16,6 +16,10 @@ dist
 ./*/*/*/.parcel-cache
 
 ./2024/VideoPlayer
+./2024/AI-Tools/5_serverWithExtraction+Annoy/venv
+./2024/AI-Tools/5_serverWithExtraction+Annoy/static/annoy/index.ann
+./2024/AI-Tools/5_serverWithExtraction+Annoy/static/csv/imagesList.csv
+./2024/AI-Tools/5_serverWithExtraction+Annoy/static/npy/features.npy
 
 *.DS_Store
 .parcel-cache
