@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS Playground</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="./index.js" type="module"></script>
+    <style>
+      video {
+        display: none;
+      }
+      #canvas,
+      #canvas_video,
+      video,
+      #overlay {
+        width: 512px;
+        height: 512px;
+      }
+      #overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <h1>testPlayground</h1> -->
+
+    <canvas id="canvas" width="1024" height="1024"></canvas
+    ><canvas id="overlay" width="1024" height="1024"></canvas><br />
+    <input type="text" id="prompt" placeholder="your prompt" /><br />
+    <button id="photo">Take a picture</button><br />
+    <button id="button">Generate</button><br />
+    <canvas id="canvas_video" width="1024" height="1024"></canvas><br />
+    <video width="1024" height="1024"></video>
+  </body>
+</html>
