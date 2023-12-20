@@ -17,7 +17,9 @@ export default class Camera {
     // Activate the webcam stream.
     navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
       this.video.srcObject = stream;
-      this.video.play();
+      setTimeout(() => {
+        this.video.play();
+      }, 1000);
       this.video.addEventListener("loadeddata", this.showWebcam.bind(this));
     });
   }

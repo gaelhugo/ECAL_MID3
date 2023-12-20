@@ -1,5 +1,6 @@
 import AiTool from "./AiTool.js";
 import Camera from "./Camera.js";
+import Config from "./Config.js";
 export default class App {
   constructor() {
     this.canvas = document.getElementById("canvas");
@@ -12,7 +13,7 @@ export default class App {
     this.button = document.getElementById("button");
 
     this.tool = new AiTool();
-    this.tool.setHash("mwhinhnp2k");
+    this.tool.setHash("0yaz5cngrl1");
 
     this.camera = new Camera(this.canvas_video, this.video);
 
@@ -44,7 +45,7 @@ export default class App {
       image.onload = () => {
         this.ctx.drawImage(image, 0, 0, 512, 512);
       };
-      image.src = `http://localhost:7860/file=${response.data[0][0].name}`;
+      image.src = `${Config.API}file=${response.data[0][0].name}`;
     }
   }
 }

@@ -11,8 +11,8 @@
     "@babel/core": "^7.23.6"
   },
   "scripts": {
-    "start": "rm -rf dist && parcel index.html --port 8080 --open",
-    "start-https": "rm -rf dist && parcel index.html --cert certificate.cert --key certificate.key --port 80 --open",
+    "start": "rm -rf dist && parcel index.html --port 8080 --host 0.0.0.0  --open",
+    "start-https": "rm -rf dist && parcel index.html --port 8080 --host 0.0.0.0 --https  --open",
     "build": "rm -rf dist && parcel build index.html"
   },
   "keywords": [],

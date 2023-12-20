@@ -1,5 +1,6 @@
 import AiTool from "./AiTool.js";
 import Camera from "./Camera.js";
+import Config from "./Config.js";
 export default class App {
   constructor() {
     this.canvas = document.getElementById("canvas");
@@ -17,7 +18,7 @@ export default class App {
     this.photo = document.getElementById("photo");
 
     this.tool = new AiTool();
-    this.tool.setHash("fxro9qmq1at");
+    this.tool.setHash(Config.HASH);
 
     this.camera = new Camera(this.canvas_video, this.video);
 
@@ -41,6 +42,10 @@ export default class App {
     this.overlay.addEventListener("mouseup", this.onMouseUp.bind(this));
     this.overlay.addEventListener("mousemove", this.onMouseMove.bind(this));
     this.overlay.addEventListener("mouseout", this.onMouseOut.bind(this));
+    // touch events
+    this.overlay.addEventListener("touchstart", this.onMouseDown.bind(this));
+    this.overlay.addEventListener("touchend", this.onMouseUp.bind(this));
+    this.overlay.addEventListener("touchmove", this.onMouseMove.bind(this));
   }
 
   onMouseDown(e) {
@@ -48,9 +53,13 @@ export default class App {
   }
   onMouseMove(e) {
     if (this.isDrawing === true) {
+      e.preventDefault();
+      const x = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+      const y = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
+
       this.overlay_ctx.fillStyle = "white";
       this.overlay_ctx.beginPath();
-      this.overlay_ctx.arc(e.clientX * 2, e.clientY * 2, 60, 0, 2 * Math.PI);
+      this.overlay_ctx.arc(x * 2, y * 2, 60, 0, 2 * Math.PI);
       this.overlay_ctx.fill();
     }
   }
@@ -92,7 +101,7 @@ export default class App {
         image.onload = () => {
           this.ctx.drawImage(image, 0, 0, 1024, 1024);
         };
-        image.src = `http://localhost:7860/file=${response.data[0][0].name}`;
+        image.src = `${Config.API}file=${response.data[0][0].name}`;
       } catch (e) {
         console.log(e);
       }
