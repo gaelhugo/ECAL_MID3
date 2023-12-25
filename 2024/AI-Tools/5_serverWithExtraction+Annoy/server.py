@@ -23,6 +23,12 @@ def get_features(image):
         image_features = model.encode_image(image_input)
     return image_features.cpu().numpy()
 
+def get_text_features(text):
+    text_input = clip.tokenize(text).to(device)
+    with torch.no_grad():
+        text_features = model.encode_text(text_input)
+    return text_features.cpu().numpy()
+
 
 app = Flask(__name__,  template_folder='templates', static_folder='static')
 
@@ -58,7 +64,29 @@ def search():
     # Retourner les urls des images similaires
     return jsonify({"urls":[urls_list[i][0] for i in response[0]],"distances":[i for i in response[1]]})
 
-    
+@app.route("/search_by_text/", methods=["POST"])
+def search_by_text():
+    # On prépare le graph 
+    f = 512
+    t  = AnnoyIndex(f, 'angular')
+    t.load('./static/annoy/index.ann') # super fast, will just mmap the file
+    # on récupère les urls des images
+    urls = pd.read_csv("./static/csv/imagesList.csv", header=None)
+    urls_list = urls.values.tolist()
+
+    # Récupérer les featrures de l'image
+    data = request.form["text"] #request.form['image'].split(',')[1]
+    # Décoder la chaîne base64
+    #image_data = base64.b64decode(data)
+    # Utiliser PIL pour ouvrir l'image depuis les données binaires
+    #image = Image.open(BytesIO(image_data))
+    # Extraire les features
+    features = get_text_features(data)
+    # Rechercher les images similaires
+    response = t.get_nns_by_vector(features[0], 5, search_k=-1, include_distances=True)
+    print(response)
+    # Retourner les urls des images similaires
+    return jsonify({"urls":[urls_list[i][0] for i in response[0]],"distances":[i for i in response[1]]})
 
 @app.route("/get_features/", methods=["POST"])
 def get_features_from_image():
