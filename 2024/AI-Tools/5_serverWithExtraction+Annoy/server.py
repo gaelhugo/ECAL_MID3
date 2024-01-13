@@ -11,6 +11,8 @@ import pandas as pd
 import base64
 from io import BytesIO
 from annoy import AnnoyIndex
+from sklearn.metrics.pairwise import cosine_similarity
+from scipy import sparse
 
 
 #function d'extraction de features
@@ -37,7 +39,42 @@ def hello_world():
     # renvoyer la page template index.html
     return render_template('index.html')
 
+@app.route("/getDistance/", methods=["POST"])
+def getDistance():
+    # On prépare le graph 
+    f = 512
+    t  = AnnoyIndex(f, 'angular')
+    t.load('./static/annoy/index.ann') # super fast, will just mmap the file
+    # on récupère les urls des images
+    urls = pd.read_csv("./static/csv/imagesList.csv", header=None)
+    urls_list = urls.values.tolist()
+    print(urls_list)
 
+    # Récupérer les featrures de l'image
+    data = request.form['image'].split(',')[1]
+    # Décoder la chaîne base64
+    image_data = base64.b64decode(data)
+    # Utiliser PIL pour ouvrir l'image depuis les données binaires
+    image = Image.open(BytesIO(image_data))
+    # Extraire les features
+    features = get_features(image)
+
+    # Get index of image
+    index = urls_list.index([request.form['refImage']])
+    print(index)
+    # Get features of image
+    ref_features = t.get_item_vector(index)
+    # Get distance between image and refImage
+    # A =  np.array([features[0],ref_features])
+    # A_sparse = sparse.csr_matrix(A)
+    # similarities_sparse = cosine_similarity(A_sparse,dense_output=False)
+    # print(similarities_sparse)
+    # return jsonify({"distance":""})
+    
+    distance = cosine_similarity([features[0]],[ref_features])
+    # Retourner la distance
+    return jsonify({"distance":distance[0][0]})
+    
 
 
 @app.route("/search/", methods=["POST"])

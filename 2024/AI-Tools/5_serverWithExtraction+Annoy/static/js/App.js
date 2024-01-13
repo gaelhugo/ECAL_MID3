@@ -4,17 +4,19 @@ class App {
     this.image = new Image();
     this.image.width = 300;
     this.image.height = 300;
-    this.image.src = "static/images/logochatblanc.png";
+    this.image.src = "static/images/truck.png";
     document.querySelector(".container").appendChild(this.image);
     this.button = document.querySelector("#extraction");
     this.annoy = document.querySelector("#annoy");
     this.search = document.querySelector("#search");
+    this.distance = document.querySelector("#distance");
     this.input = document.querySelector("#search_input");
     this.search_text = document.querySelector("#search_text");
     // action buttons
     this.button.addEventListener("click", this.handleClick.bind(this));
     this.annoy.addEventListener("click", this.handleAnnoy.bind(this));
     this.search.addEventListener("click", this.handleSearch.bind(this));
+    this.distance.addEventListener("click", this.handleDistance.bind(this));
     this.search_text.addEventListener(
       "click",
       this.handleSearchText.bind(this)
@@ -40,6 +42,13 @@ class App {
   handleSearchText(e) {
     console.log("sending text to server");
     this.postSearchText();
+  }
+
+  handleDistance(e) {
+    console.log("sending distance to server");
+    // index of the image
+    let name_of_image = "static/images/truck.png";
+    this.postDistance(name_of_image);
   }
 
   postImage() {
@@ -90,6 +99,26 @@ class App {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+      });
+  }
+
+  postDistance(image_name) {
+    const formData = new FormData();
+    // Convertir l'image en base64
+    const base64Image = this.imageToBase64(this.image);
+    // Ajouter la chaîne base64 à FormData avec la clé "image"
+    formData.append("image", base64Image);
+    // add index of the image
+    formData.append("refImage", image_name);
+
+    fetch("/getDistance", {
+      method: "POST",
+      body: formData,
+    })
+      .then((data) => data.json())
+      .then((json) => {
+        console.log(json);
+        // document.querySelector(".console").textContent = json;
       });
   }
 
