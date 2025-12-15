@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Brikeld Search</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
+          Arial, sans-serif;
+        margin: 2rem;
+        max-width: 900px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 140px 120px;
+        gap: 0.75rem;
+        align-items: end;
+      }
+      label {
+        display: block;
+        font-size: 0.9rem;
+        color: #333;
+        margin-bottom: 0.25rem;
+      }
+      input {
+        width: 100%;
+        padding: 0.6rem 0.7rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+      }
+      button {
+        padding: 0.65rem 0.9rem;
+        border-radius: 8px;
+        border: 0;
+        background: #111;
+        color: white;
+        cursor: pointer;
+      }
+      pre {
+        background: #0b1020;
+        color: #e6e6e6;
+        padding: 1rem;
+        border-radius: 10px;
+        overflow: auto;
+      }
+      .hint {
+        color: #666;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Brikeld Search</h1>
+    <form id="searchForm">
+      <div>
+        <label for="query">Query</label>
+        <input id="query" name="query" placeholder="a love song" required />
+      </div>
+      <div>
+        <label for="k">k</label>
+        <input id="k" name="k" type="number" min="1" value="10" required />
+      </div>
+      <div>
+        <button type="submit">Search</button>
+      </div>
+    </form>
+    <div class="hint">
+      POSTs to <code>/search</code> and prints JSON results below.
+    </div>
+    <h2>Results</h2>
+    <pre id="results">(none)</pre>
+
+    <script>
+      const form = document.getElementById("searchForm");
+      const results = document.getElementById("results");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        results.textContent = "Loading...";
+
+        const query = document.getElementById("query").value;
+        const k = Number(document.getElementById("k").value);
+
+        const resp = await fetch("/search", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query, k }),
+        });
+
+        const data = await resp.json();
+        results.textContent = JSON.stringify(data, null, 2);
+      });
+    </script>
+  </body>
+</html>

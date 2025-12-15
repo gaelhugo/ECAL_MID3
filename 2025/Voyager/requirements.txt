@@ -1,0 +1,6 @@
+voyager
+torch>=2.4.0
+numpy
+pandas
+flask
+git+https://github.com/gaelhugo/CLAP.git/
